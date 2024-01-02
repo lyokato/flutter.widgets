@@ -488,9 +488,11 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
 
   void _jumpTo({required int index, required double alignment}) {
     _stopScroll(canceled: true);
+    /*
     if (index > widget.itemCount - 1) {
       index = widget.itemCount - 1;
     }
+    */
     setState(() {
       primary.scrollController.jumpTo(0);
       primary.target = index;
