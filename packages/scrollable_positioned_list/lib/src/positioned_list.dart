@@ -165,7 +165,11 @@ class _PositionedListState extends State<PositionedList> {
   }
 
   @override
-  Widget build(BuildContext context) => RegistryWidget(
+  Widget build(BuildContext context) {
+    final listKeyLeading = ValueKey('leading:${widget.positionedIndex}');
+    final listKeyCenter = ValueKey('center:${widget.positionedIndex}');
+    final listKeyTrailing = ValueKey('trailing:${widget.positionedIndex}');
+    return RegistryWidget(
         elementNotifier: registeredElements,
         child: UnboundedCustomScrollView(
           anchor: widget.alignment,
@@ -182,6 +186,7 @@ class _PositionedListState extends State<PositionedList> {
               SliverPadding(
                 padding: _leadingSliverPadding,
                 sliver: SliverList(
+                  key: listKeyLeading,
                   delegate: SliverChildBuilderDelegate(
                     (context, index) => widget.separatorBuilder == null
                         ? _buildItem(widget.positionedIndex - (index + 1))
@@ -200,6 +205,7 @@ class _PositionedListState extends State<PositionedList> {
               key: _centerKey,
               padding: _centerSliverPadding,
               sliver: SliverList(
+                key: listKeyCenter,
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => widget.separatorBuilder == null
                       ? _buildItem(index + widget.positionedIndex)
@@ -217,6 +223,7 @@ class _PositionedListState extends State<PositionedList> {
               SliverPadding(
                 padding: _trailingSliverPadding,
                 sliver: SliverList(
+                  key: listKeyTrailing,
                   delegate: SliverChildBuilderDelegate(
                     (context, index) => widget.separatorBuilder == null
                         ? _buildItem(index + widget.positionedIndex + 1)
@@ -234,6 +241,7 @@ class _PositionedListState extends State<PositionedList> {
           ],
         ),
       );
+  }
 
   Widget _buildSeparatedListElement(int index) {
     if (index.isEven) {
