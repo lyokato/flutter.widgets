@@ -166,9 +166,9 @@ class _PositionedListState extends State<PositionedList> {
 
   @override
   Widget build(BuildContext context) {
-    final listKeyLeading = ValueKey('leading:${widget.positionedIndex}');
-    final listKeyCenter = ValueKey('center:${widget.positionedIndex}');
-    final listKeyTrailing = ValueKey('trailing:${widget.positionedIndex}');
+    final listKeyLeading = ValueKey('leading:${widget.positionedIndex}:${widget.alignment}');
+    final listKeyCenter = ValueKey('center:${widget.positionedIndex}:${widget.alignment}');
+    final listKeyTrailing = ValueKey('trailing:${widget.positionedIndex}:${widget.alignment}');
     return RegistryWidget(
         elementNotifier: registeredElements,
         child: UnboundedCustomScrollView(
